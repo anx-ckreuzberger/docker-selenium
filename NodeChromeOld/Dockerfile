@@ -3,18 +3,18 @@ MAINTAINER Selenium <selenium-developers@googlegroups.com>
 
 USER root
 
-# docker build -t selenium/node-googlechrome-500:latest --build-arg CHROME_VERSION=50.0 NodeChrome
-# docker build -t selenium/node-googlechrome-490:latest --build-arg CHROME_VERSION=49.0 NodeChrome
-# docker build -t selenium/node-googlechrome-480:latest --build-arg CHROME_VERSION=48.0 NodeChrome
-# docker build -t selenium/node-googlechrome-470:latest --build-arg CHROME_VERSION=47.0 NodeChrome
-# docker build -t selenium/node-googlechrome-460:latest --build-arg CHROME_VERSION=46.0 NodeChrome
-# docker build -t selenium/node-googlechrome-450:latest --build-arg CHROME_VERSION=45.0 NodeChrome
-# docker build -t selenium/node-googlechrome-440:latest --build-arg CHROME_VERSION=44.0 NodeChrome
+# docker build -t selenium/node-googlechrome-500:latest NodeChrome
+# docker build -t selenium/node-googlechrome-490:latest --build-arg CHROME_VERSION=49 NodeChromeOld
+# docker build -t selenium/node-googlechrome-480:latest --build-arg CHROME_VERSION=48 NodeChromeOld
+
 
 #===============
 # Google Chrome
 #===============
-ENV CHROME_VERSION Latest
+ENV CHROME_VERSION 49
+
+ENV url[49] http://www.slimjet.com/chrome/lnx/chrome64_49.0.2623.75.deb
+ENV url[48] http://www.slimjet.com/chrome/lnx/chrome64_48.0.2564.109.deb
 
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
   && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
@@ -22,10 +22,13 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
   && apt-get -qqy install \
     google-chrome-stable \
   && rm /etc/apt/sources.list.d/google-chrome.list \
-  && rm -rf /var/lib/apt/lists/*
+  && rm -rf /var/lib/apt/lists/* \
+  && apt-get -y purge google-chrome-stable \
+  && wget --no-verbose -O /tmp/chrome_installer.deb ${url[$CHROME_VERSION]} \
+  && dpkg -i /tmp/chrome_installer.deb
 
 #==================
-# Chrome webdriver
+# Chrome 
 #==================
 ENV CHROME_DRIVER_VERSION 2.21
 RUN wget --no-verbose -O /tmp/chromedriver_linux64.zip https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip \

@@ -1,0 +1,34 @@
+#!/bin/bash
+
+echo "
+{
+  \"capabilities\": [
+    {
+      \"browserName\": \"*googlechrome\",
+      \"maxInstances\": 1,
+      \"seleniumProtocol\": \"Selenium\",
+      \"browser-version\": \"$CHROME_VERSION\",
+      \"version\": \"$CHROME_VERSION\",
+      \"platform\": \"Linux\",
+      \"javascriptEnabled\":true
+    },
+    {
+      \"browserName\": \"chrome\",
+      \"maxInstances\": 1,
+      \"seleniumProtocol\": \"WebDriver\",
+      \"browser-version\": \"$CHROME_VERSION\",
+      \"version\": \"$CHROME_VERSION\",
+      \"platform\": \"Linux\",
+      \"javascriptEnabled\":true
+    }
+  ],
+  \"configuration\": {
+    \"proxy\": \"org.openqa.grid.selenium.proxy.DefaultRemoteProxy\",
+    \"maxSession\": 1,
+    \"port\": 5555,
+    \"register\": true,
+    \"registerCycle\": 5000
+  }
+}" 
+
+

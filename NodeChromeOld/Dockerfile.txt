@@ -1,21 +1,10 @@
-FROM selenium/node-base:2.53.0
 MAINTAINER Selenium <selenium-developers@googlegroups.com>
 
 USER root
 
-# docker build -t selenium/node-googlechrome-500:latest --build-arg CHROME_VERSION=50.0 NodeChrome
-# docker build -t selenium/node-googlechrome-490:latest --build-arg CHROME_VERSION=49.0 NodeChrome
-# docker build -t selenium/node-googlechrome-480:latest --build-arg CHROME_VERSION=48.0 NodeChrome
-# docker build -t selenium/node-googlechrome-470:latest --build-arg CHROME_VERSION=47.0 NodeChrome
-# docker build -t selenium/node-googlechrome-460:latest --build-arg CHROME_VERSION=46.0 NodeChrome
-# docker build -t selenium/node-googlechrome-450:latest --build-arg CHROME_VERSION=45.0 NodeChrome
-# docker build -t selenium/node-googlechrome-440:latest --build-arg CHROME_VERSION=44.0 NodeChrome
-
 #===============
 # Google Chrome
 #===============
-ENV CHROME_VERSION Latest
-
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
   && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
   && apt-get update -qqy \
@@ -39,8 +28,7 @@ RUN wget --no-verbose -O /tmp/chromedriver_linux64.zip https://chromedriver.stor
 #========================
 # Selenium Configuration
 #========================
-COPY generate_config /opt/selenium/generate_config
-RUN /opt/selenium/generate_config > /opt/selenium/config.json
+COPY config.json /opt/selenium/config.json
 
 #=================================
 # Chrome Launch Script Modication

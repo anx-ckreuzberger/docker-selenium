@@ -12,37 +12,58 @@ services:
   networks: 
    - prodnetwork
 
- nodeff4402debug:
+ nodeff4402:
   image: selenium/node-firefox-4402
   networks: 
    - prodnetwork
   environment:
    - HUB_PORT_4444_TCP_ADDR=selhub
-  ports:
-   - 5920:5900
   depends_on:
    - selhub
 
- nodeff4502debug:
+ nodeff4502:
   image: selenium/node-firefox-4502
   networks: 
    - prodnetwork
   environment:
    - HUB_PORT_4444_TCP_ADDR=selhub
-  ports:
-   - 5921:5900
   depends_on:
    - selhub
 
 
- nodeff4601debug:
+ nodeff4601:
   image: selenium/node-firefox-4601
   networks: 
    - prodnetwork
   environment:
    - HUB_PORT_4444_TCP_ADDR=selhub
-  ports:
-   - 5922:5900
+  depends_on:
+   - selhub
+
+ nodechrome50:
+  image: selenium/node-googlechrome-500
+  networks: 
+   - prodnetwork
+  environment:
+   - HUB_PORT_4444_TCP_ADDR=selhub
+  depends_on:
+   - selhub
+
+ nodechrome49:
+  image: selenium/node-googlechrome-490
+  networks: 
+   - prodnetwork
+  environment:
+   - HUB_PORT_4444_TCP_ADDR=selhub
+  depends_on:
+   - selhub
+
+ nodechrome48:
+  image: selenium/node-googlechrome-480
+  networks: 
+   - prodnetwork
+  environment:
+   - HUB_PORT_4444_TCP_ADDR=selhub
   depends_on:
    - selhub
 
