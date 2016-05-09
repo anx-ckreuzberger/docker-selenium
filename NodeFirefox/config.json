@@ -3,12 +3,20 @@
     {
       "browserName": "*firefox",
       "maxInstances": 1,
-      "seleniumProtocol": "Selenium"
+      "seleniumProtocol": "Selenium",
+      "browser-version": "${FIREFOX_VERSION}",
+      "version": "${FIREFOX_VERSION}",
+      "platform": "Linux",
+      "javascriptEnabled":true
     },
     {
       "browserName": "firefox",
       "maxInstances": 1,
-      "seleniumProtocol": "WebDriver"
+      "seleniumProtocol": "WebDriver",
+      "browser-version": "${FIREFOX_VERSION}",
+      "version": "${FIREFOX_VERSION}",
+      "platform": "Linux",
+      "javascriptEnabled":true
     }
   ],
   "configuration": {
